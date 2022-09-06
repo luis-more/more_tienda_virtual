@@ -137,23 +137,30 @@ class Clientes extends Controller
     {
         $datos = file_get_contents('php://input');
         $json = json_decode($datos, true);
-        if(is_array($json)){
+        $pedidos = $json['pedidos'];
+        $productos = $json['productos'];
+        if(is_array($pedidos)){
             $id_transaccion = $json['id'];
-            $monto = $json['purchase_units'][0]['amount']['value'];
-            $estado = $json['status'];
+            $monto = $pedidos['purchase_units'][0]['amount']['value'];
+            $estado = $pedidos['status'];
             $fecha = date('Y-m-d H:i:s');
-            $email = $json['payer']['email_address'];
-            $nombre = $json['payer']['name']['given_name'];
-            $apellido = $json['payer']['name']['surname'];
-            $direccion = $json['purchase_units'][0]['shipping']['address']['address_line_1'];
-            $cuidad = $json['purchase_units'][0]['shipping']['address']['admin_area_2'];
+            $email = $pedidos['payer']['email_address'];
+            $nombre = $pedidos['payer']['name']['given_name'];
+            $apellido = $pedidos['payer']['name']['surname'];
+            $direccion = $pedidos['purchase_units'][0]['shipping']['address']['address_line_1'];
+            $ciudad = $pedidos['purchase_units'][0]['shipping']['address']['admin_area_2'];
             $email_user = $_SESSION['correoCliente'];
-            $data = $this->model->registrarPedido($id_transaccion, $monto, $estado, $fecha, $email, $nombre, $apellido, $direccion, $cuidad, $email_user);
+            $data = $this->model->registrarPedido($id_transaccion, $monto, $estado, $fecha, $email, $nombre, $apellido, $direccion, $ciudad, $email_user);
            
-          }
-        print_r($data);
-       
-    }              
-       
-         
+            if($data){
+                foreach($productos as $producto){
+                    $temp = $this->model->getProducto($producto['idProducto']);
+                    $this->model->registrarDetalle(); 
+                }
+            }else{
+
+            }
+        }        
+    }        
+   
 }

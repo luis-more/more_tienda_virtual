@@ -44,10 +44,10 @@ class ClientesModel extends Query{
         return $this->select($sql);
     }
 
-    public function registrarPedido($id_transaccion, $monto, $estado, $fecha, $email, $nombre, $apellido, $direccion, $cuidad, $email_user)
+    public function registrarPedido($id_transaccion, $monto, $estado, $fecha, $email, $nombre, $apellido, $direccion, $ciudad, $email_user)
     {
-        $sql = "INSERT INTO pedidos (id_transaccion, monto, estado, fecha, email, nombre, apellido, direccion, cuidad, email_user) VALUES (?,?,?,?,?,?,?,?,?.?)";
-        $datos = array($id_transaccion, $monto, $estado, $fecha, $email, $nombre, $apellido, $direccion, $cuidad, $email_user);
+        $sql = "INSERT INTO pedidos (id_transaccion, monto, estado, fecha, email, nombre, apellido, direccion, ciudad, email_user) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $datos = array($id_transaccion, $monto, $estado, $fecha, $email, $nombre, $apellido, $direccion, $ciudad, $email_user);
         $data = $this->insertar($sql, $datos);
         if ($data > 0) {
           $res = $data;
@@ -55,6 +55,12 @@ class ClientesModel extends Query{
           $res = 0;
         }
         return $res;
+    }
+
+    public function getProducto($id_producto)
+    {
+        $sql = "SELECT * FROM productos INNER JOIN WHERE id = $id_producto";
+        return $this->select($sql);
     }
 }
  
