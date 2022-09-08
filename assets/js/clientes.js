@@ -1,16 +1,32 @@
 const tableLista = document.querySelector("#tableListaProductos tbody");
+const tblPendientes = document.querySelector("#tblPendientes");
 let productosjson = [];
 document.addEventListener("DOMContentLoaded", function () {
   if(tableLista){
     getListaProductos();
   }
 
-
-    
-
+//cargar datos pendientes con data tables
+$('#tblPendientes').DataTable( {
+  ajax: {
+    url: '/api/myData',
+    dataSrc: ''
+},
+  columns: [
+      { data: 'name' },
+      { data: 'hr.position' },
+      { data: 'hr.salary' },
+      { data: 'hr.state_date' },
+      { data: 'contact.office' },
+      { data: 'contact.extn' }
+  ]
+} );
+//fin de datos pendientes
 });
+
 //ver lista de productos de tu perfil
 function getListaProductos() {
+  let html = "";
   const url = base_url + "principal/listaProductos";
   const http = new XMLHttpRequest();
   http.open("POST", url, true);
@@ -18,30 +34,39 @@ function getListaProductos() {
   http.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       const res = JSON.parse(this.responseText);
-      let html = "";
-      res.productos.forEach((producto) => {
-        html += `<tr>
-                <td>
-                <img class="img-thumbnail rounded-circle" src="${producto.imagen}" alt="" width="60">
-                </td>
-                <td>${producto.nombre}</td>
-                <td><span class="badge bg-warning">${res.moneda + ' '+ producto.precio}</span></td>
-                <td><span class="badge bg-primary">${producto.cantidad}</span></td>
-                <td>${producto.subTotal}</td>
-								</tr>`;
-                //agregar productos para paypal
-                let json = {
-                  "name": producto.nombre, /* Shows within upper-right dropdown during payment approval */"unit_amount": {
-                    "currency_code": res.moneda,
-                    "value": producto.precio
-                  },
-                  "quantity": producto.cantidad
-                }
-                productosjson.push(json);
-      });
-      tableLista.innerHTML = html;
-			document.querySelector('#totalProducto').textContent = 'T0TAL A PAGAR: ' + res.moneda + ' '+ res.total;
-      botonPaypal(res.totalPaypal, res.moneda);
+      if(res.totalPaypal > 0){
+        res.productos.forEach((producto) => {
+          html += `<tr>
+                  <td>
+                  <img class="img-thumbnail rounded-circle" src="${producto.imagen}" alt="" width="60">
+                  </td>
+                  <td>${producto.nombre}</td>
+                  <td><span class="badge bg-warning">${res.moneda + ' '+ producto.precio}</span></td>
+                  <td><span class="badge bg-primary">${producto.cantidad}</span></td>
+                  <td>${producto.subTotal}</td>
+                  </tr>`;
+                  //agregar productos para paypal
+                  let json = {
+                    "name": producto.nombre, /* Shows within upper-right dropdown during payment approval */"unit_amount": {
+                      "currency_code": res.moneda,
+                      "value": producto.precio
+                    },
+                    "quantity": producto.cantidad
+                  }
+                  productosjson.push(json);
+        });
+        tableLista.innerHTML = html;
+        document.querySelector('#totalProducto').textContent = 'T0TAL A PAGAR: ' + res.moneda + ' '+ res.total;
+        botonPaypal(res.totalPaypal, res.moneda);
+
+      }else{
+        tableLista.innerHTML = ` 
+        <tr>
+          <td colspan="5" class="text-center">CARRITO VACIO</td>
+        </tr>
+        `;
+      }
+      
     }
   }
 }
@@ -87,7 +112,13 @@ function registrarPedido(datos){
     if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
       const res = JSON.parse(this.responseText);
-      
+      Swal.fire("Avizo?", res.msg, res.icono);
+      if(res.icono == 'success'){
+        localStorage.removeItem('listaCarrito');
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
     }
   }
 }

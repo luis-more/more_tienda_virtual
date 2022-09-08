@@ -139,8 +139,8 @@ class Clientes extends Controller
         $json = json_decode($datos, true);
         $pedidos = $json['pedidos'];
         $productos = $json['productos'];
-        if(is_array($pedidos)){
-            $id_transaccion = $json['id'];
+        if(is_array($pedidos) && is_array($productos)){
+            $id_transaccion = $pedidos['id'];
             $monto = $pedidos['purchase_units'][0]['amount']['value'];
             $estado = $pedidos['status'];
             $fecha = date('Y-m-d H:i:s');
@@ -152,15 +152,20 @@ class Clientes extends Controller
             $email_user = $_SESSION['correoCliente'];
             $data = $this->model->registrarPedido($id_transaccion, $monto, $estado, $fecha, $email, $nombre, $apellido, $direccion, $ciudad, $email_user);
            
-            if($data){
+            if($data > 0){
                 foreach($productos as $producto){
                     $temp = $this->model->getProducto($producto['idProducto']);
-                    $this->model->registrarDetalle(); 
+                    $this->model->registrarDetalle($temp['nombre'], $temp['precio'], $producto['cantidad'], $data ); 
                 }
+                $mensaje = array('msg' => 'Pedido registrado', 'icono' => 'success');
             }else{
-
+                $mensaje = array('msg' => 'Error al registrar el pedido', 'icono' => 'error');
             }
-        }        
+        }else{
+            $mensaje = array('msg' => 'error fatal con los datos', 'icono' => 'error');
+        }
+        echo json_encode($mensaje);
+        die();       
     }        
    
 }
