@@ -6,13 +6,10 @@ class Principal extends Controller
         parent::__construct();
         session_start();
     }
-    public function index()
-    {
-    }
-
     //vista about
     public function about()
     {
+        $data['perfil'] = 'no';
         $data['title'] = 'Acerca de Nosotros';
         $this->views->getView('principal', 'about', $data);
     }
@@ -20,6 +17,7 @@ class Principal extends Controller
     //vista shop
     public function shop($page)
     {
+        $data['perfil'] = 'no';
         $pagina = empty($page) ? 1 : $page;
         $porPagina = 10;
         $desde = ($pagina - 1) * $porPagina;
@@ -34,6 +32,7 @@ class Principal extends Controller
     //vista detalle
     public function detail($id_producto)
     {
+        $data['perfil'] = 'no';
         $data['producto'] = $this->model->getProducto($id_producto);
         $id_categoria = $data['producto']['id_categoria'];
         $data['relacionados'] = $this->model->getAleatorios(
@@ -47,6 +46,7 @@ class Principal extends Controller
     //vista categorias
     public function categorias($datos)
     {
+        $data['perfil'] = 'no';
         $id_categoria = 1;
         $page = 1;
         $array = explode(',', $datos);
@@ -82,6 +82,7 @@ class Principal extends Controller
     //vista contacto
     public function contactos()
     {
+        $data['perfil'] = 'no';
         $data['title'] = 'Contactos';
         $this->views->getView('principal', 'contact', $data);
     }
@@ -89,6 +90,7 @@ class Principal extends Controller
     //vista  lista de deseo
     public function deseo()
     {
+        $data['perfil'] = 'no';
         $data['title'] = 'Tu lista de deseos';
         $this->views->getView('principal', 'deseo', $data);
     }
@@ -122,6 +124,14 @@ class Principal extends Controller
         echo json_encode($array, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    public function busqueda($valor)
+    {
+        $data = $this->model->getBusqueda($valor);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    
 }
 
 

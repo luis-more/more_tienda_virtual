@@ -1,7 +1,5 @@
 <?php include_once 'Views/template-principal/header.php'; ?>
-
 <!-- Start Content -->
-
 <div class="container py-5">
   <div class="row">
     <?php  if($data['verificar']['verify'] == 1){  ?>
@@ -19,19 +17,29 @@
               </tr>
             </thead>
             <tbody>
-
             </tbody>
-
           </table>
           <div class="card-footer text-end">
             <h3 id="totalProducto"></h3>
           </div>
         </div>
       </div>
-
     </div>
     <div class="col-md-4">
       <div class="card shadow-lg">
+        <!-- inicio drop down para cerrar sesion -->
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle float-end" href="#" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <if class="fas fa-user"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="<?php echo BASE_URL . 'clientes/salir'; ?>"><i class="fas fa-times-circle"></i>Cerrar Sesión</a>
+            </li>
+          </ul>
+        </div>
+        <!-- fin drop down para cerrar sesion   -->
         <div class="card-body text-center">
           <!-- inicio nav tab -->
           <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
@@ -89,30 +97,39 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="pendientes-tab-pane" role="tabpanel" aria-labelledby="pendientes-tab" tabindex="0">
-            <table class="table table-bordered table-striped table-hover" id="tblPendientes">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Producto</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="tab-pane fade" id="pendientes-tab-pane" role="tabpanel" aria-labelledby="pendientes-tab"
+              tabindex="0">
+              <div class="col-12">
+                <div class="card shadow-lg">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped table-hover" id="tblPendientes">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="tab-pane fade" id="completados-tab-pane" role="tabpanel" aria-labelledby="completados-tab" tabindex="0">
-            <h1>TUs pendientes</h1>  
+            <div class="tab-pane fade" id="completados-tab-pane" role="tabpanel" aria-labelledby="completados-tab"
+              tabindex="0">
+              <h1>TUs pendientes</h1>
             </div>
           </div>
           <!-- End navtab -->
         </div>
       </div>
     </div>
+
     <?php }else{ ?>
     <div class="alert alert-danger text-center" role="alert">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -129,16 +146,74 @@
 
   </div>
 </div>
-
 </div>
 <!-- End Content -->
+<!-- modal par mostar los estados en la tabla -->
+<div id="modalPedido" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Estado del Pedido</h5>
+        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
 
-<?php include_once 'Views/template-principal/footer.php'; ?>
+          <div class="col-md-6 col-lg-4 pb-5">
+            <div class="h-100 py-5 services-icon-wap shadow">
+              <div class="h1 text-util text-center"><i class="fa fa-truck fa-lg"></i></div>
+              <h2 class="h5 mt-4 text-center">Enviado</h2>
+            </div>
+          </div>
 
-<script type="text/javascript" src="<?php echo BASE_URL . 'assets/DataTables/datatables.min.js'; ?>"></script>
+          <div class="col-md-6 col-lg-4 pb-5">
+            <div class="h-100 py-5 services-icon-wap shadow">
+              <div class="h1 text-util text-center"><i class="fa fa-exchange-alt"></i></div>
+              <h2 class="h5 mt-4 text-center">Proceso</h2>
+            </div>
+          </div>
 
-<script src="<?php echo BASE_URL . 'assets/js/clientes.js'; ?>"></script>
-<!-- End Script -->
-</body>
+          <div class="col-md-6 col-lg-4 pb-5">
+            <div class="h-100 py-5 services-icon-wap shadow">
+              <div class="h1 text-util text-center"><i class="fa fa-percent"></i></div>
+              <h2 class="h5 mt-4 text-center">Completado</h2>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table table-border table-striped table-hover align-middle" id="tablePedidos"
+                style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Sub Total</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-</html>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End modal par mostar los estados en la tabla -->
+
+
+
+  <?php include_once 'Views/template-principal/footer.php'; ?>
+
+  <script type="text/javascript" src="<?php echo BASE_URL . 'assets/DataTables/datatables.min.js'; ?>"></script>
+
+  <script src="<?php echo BASE_URL . 'assets/js/clientes.js'; ?>"></script>
+  <!-- End Script -->
+  </body>
+
+  </html>

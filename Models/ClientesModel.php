@@ -75,6 +75,18 @@ class ClientesModel extends Query{
       }
       return $res;
     }
+
+    public function getPedidos($proceso)
+    {
+        $sql = "SELECT * FROM pedidos WHERE proceso = $proceso";
+        return $this->selectAll($sql); 
+    }
+
+    public function verPedido($idPedido)
+    {
+        $sql = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedido d ON p.id = d.id_pedido WHERE p.id = $idPedido";
+        return $this->selectAll($sql); 
+    }
 }
  
 ?>

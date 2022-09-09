@@ -9,16 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
 //cargar datos pendientes con data tables
 $('#tblPendientes').DataTable( {
   ajax: {
-    url: '/api/myData',
+    url: base_url + 'clientes/listarPendientes',
     dataSrc: ''
 },
   columns: [
-      { data: 'name' },
-      { data: 'hr.position' },
-      { data: 'hr.salary' },
-      { data: 'hr.state_date' },
-      { data: 'contact.office' },
-      { data: 'contact.extn' }
+      { data: 'id_transaccion' },
+      { data: 'monto' },
+      { data: 'fecha' },
+      { data: 'accion' }
   ]
 } );
 //fin de datos pendientes
@@ -121,4 +119,29 @@ function registrarPedido(datos){
       }
     }
   }
+}
+
+function verPedido(idPedido){
+  const mPedido = new bootstrap.Modal(document.getElementById('modalPedido'))
+  const url = base_url + "clientes/verPedido/" + idPedido;
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const res = JSON.parse(this.responseText);  
+      let html = "";
+      res.productos.forEach(row => {
+        let subTotal = parseFloat(row.precio) * parseInt(row.cantidad);
+        html += `<tr>
+                <td>${row.producto}</td>
+                <td><span class="badge bg-warning">${res.moneda + ' '+ row.precio}</span></td>
+                <td><span class="badge bg-primary">${row.cantidad}</span></td>
+                <td>${subTotal.toFixed(2)}</td>
+            </tr>`;
+      });
+      document.querySelector('#tablePedidos tbody').innerHTML = html;    
+      mPedido.show();
+    }
+  };
 }

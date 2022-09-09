@@ -17,6 +17,7 @@ class Clientes extends Controller
         if(empty($_SESSION['correoCliente'])){
             header('Location: ' .BASE_URL);
         }
+        $data['perfil'] = 'si';
         $data['title'] = 'Tu Perfil';
         $data['verificar'] = $this->model->getVerificar($_SESSION['correoCliente']);
         $this->views->getView('principal', "perfil", $data); 
@@ -133,7 +134,7 @@ class Clientes extends Controller
     }
 
     //registrar pedidos
-    function registrarPedido()
+    public function registrarPedido()
     {
         $datos = file_get_contents('php://input');
         $json = json_decode($datos, true);
@@ -166,6 +167,31 @@ class Clientes extends Controller
         }
         echo json_encode($mensaje);
         die();       
-    }        
+    }    
+
+     //registrar productos pendientes al perfil del usuario
+    public function listarPendientes()
+    {
+       $data = $this->model->getPedidos(1);    
+       for ($i=0; $i < count($data); $i++) { 
+        $data[$i]['accion'] = '<div class="text-center"><button class="btn btn-primary" type="button" onclick="verPedido('.$data[$i]['id'].')"><i class="fas fa-eye"></i></button></div>';
+       }
+       echo json_encode($data);
+       die(); 
+    } 
+
+    public function verPedido($idPedido)
+    {
+       $data['productos'] = $this->model->verPedido($idPedido);
+       $data['moneda'] = MONEDA;
+        echo json_encode($data);
+        die(); 
+    }    
+     
+    public function salir()
+    {
+        session_destroy();
+        header('Location: ' .BASE_URL);
+    }
    
 }

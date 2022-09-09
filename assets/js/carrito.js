@@ -138,7 +138,7 @@ function getListaCarrito() {
       res.productos.forEach((producto) => {
         html += `<tr>
                 <td>
-                <img class="img-thumbnail rounded-circle" src="${producto.imagen}" alt="" width="60">
+                <img class="img-thumbnail rounded-circle" src="${producto.imagen}" alt="" width="50">
                 </td>
                 <td>${producto.nombre}</td>
                 <td><span class="badge bg-warning">${res.moneda + ' '+ producto.precio}</span></td>
@@ -153,8 +153,8 @@ function getListaCarrito() {
 			document.querySelector('#totalGeneral').textContent = res.total;
       btnEliminarCarrito();
     }
-  };
-
+  }
+}
   function btnEliminarCarrito() {
     let listaEliminar = document.querySelectorAll(".btnDeletecart");
     for (let i = 0; i < listaEliminar.length; i++) {
@@ -164,7 +164,7 @@ function getListaCarrito() {
       });
     }
   }
-}
+
 
 function eliminarListaCarrito(idProducto) {
 for (let i = 0; i < listaCarrito.length; i++) {

@@ -15,6 +15,8 @@ const claveLogin = document.querySelector('#claveLogin');
 
 const modalLogin = new bootstrap.Modal(document.getElementById('modalLogin'));
 
+const inputBusqueda = document.querySelector('#inputModalSearch');
+
 document.addEventListener("DOMContentLoaded", function () {
   btnRegister.addEventListener('click', function(){
     frmLogin.classList.add('d-none');
@@ -99,6 +101,20 @@ login.addEventListener('click', function(){
   }
 }
 });
+
+//busqueda de productos ..... buscador.........
+inputBusqueda.addEventListener('keyup', function(e){
+  const url = base_url + "principal/busqueda";
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      //const res = JSON.parse(this.responseText);
+    }
+  }
+})
 
 });
 
