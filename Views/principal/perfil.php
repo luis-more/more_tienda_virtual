@@ -211,7 +211,7 @@
   <?php include_once 'Views/template-principal/footer.php'; ?>
 
   <script type="text/javascript" src="<?php echo BASE_URL . 'assets/DataTables/datatables.min.js'; ?>"></script>
-
+  <script src="<?php echo BASE_URL . 'assets/js/es-ES.js'; ?>"></script>
   <script src="<?php echo BASE_URL . 'assets/js/clientes.js'; ?>"></script>
   <!-- End Script -->
   </body>

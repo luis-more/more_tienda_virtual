@@ -17,7 +17,10 @@ $('#tblPendientes').DataTable( {
       { data: 'monto' },
       { data: 'fecha' },
       { data: 'accion' }
-  ]
+  ],
+  language,
+  dom,
+  Buttons
 } );
 //fin de datos pendientes
 });
