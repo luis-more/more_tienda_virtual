@@ -1,4 +1,4 @@
-<?php include_once 'Views/template-principal/header.php';?>
+<?php include_once 'Views/template/header-principal.php';?>
 
     <!-- Start Content Page -->
     <div class="container-fluid bg-light py-5">
@@ -40,7 +40,7 @@
     <!-- End Contact -->
 
 
-    <?php include_once 'Views/template-principal/footer.php'; ?>
+    <?php include_once 'Views/template/footer-principal.php';?>
      <!-- estos archivos para ´poder editar el mensaje en la seccion contactos -->
     <script src="<?php echo BASE_URL . 'assets/js/ckeditor.js'; ?>"></script>
     <script src="<?php echo BASE_URL . 'assets/js/modulos/contactos.js'; ?>"></script>

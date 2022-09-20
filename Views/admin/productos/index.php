@@ -35,7 +35,7 @@
   </div>
   <div class="tab-pane fade" id="nuevoProducto" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
     <div class="card">
-      <div class="card-body">        
+      <div class="card-body p-5">        
       <form id="frmRegistro">
         <div class="row">
           <input type="hidden" id="id" name="id">
@@ -65,7 +65,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="categorias">Categoria</label>
-              <select id="categorias" class="form-control" name="categoria">
+              <select id="categoria" class="form-control" name="categoria">
                 <option value="">Seleccionar</option>
                 <?php 
                 foreach ($data['categorias'] as $categoria) {?>
@@ -79,14 +79,14 @@
           <div class="col-md-6">
             <div class="form-group mb-2">
               <label for="descripcion">Descripción</label>
-              <text id="descripcion" class="form-control" type="text" name="descripcion" placeholder="descripción del producto">
+              <input id="descripcion" class="form-control" type="text" name="descripcion" placeholder="descripción del producto">
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label for="imagen">Imagen (Opcional)</label>
-              <input type="file" class="form-control-file" name="imagen" id="imagen" placeholder=""
+              <input type="file" class="form-control" name="imagen" id="imagen" placeholder=""
                 aria-describedby="fileHelpId">
             </div>            
           </div>
@@ -94,7 +94,6 @@
         </div>
         <div class="text-end">
           <button type="submit" class="btn btn-primary" id="btnAccion">Registrar</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
         </div>
       </form>
 

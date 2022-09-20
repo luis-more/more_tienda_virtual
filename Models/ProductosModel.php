@@ -25,22 +25,23 @@ class ProductosModel extends Query{
         return $this->insertar($sql, $array);
     }
 
-    public function eliminar($idCat)
+    public function eliminar($idPro)
     {
-        $sql = "UPDATE categorias SET estado = ? WHERE id = ?";
-        $array = array(0, $idCat);
+        $sql = "UPDATE productos SET estado = ? WHERE id = ?";
+        $array = array(0, $idPro);
         return $this->save($sql, $array);
     }
-    public function getCategoria($idCat)
+    
+    public function getProducto($idPro)
     {
-        $sql = "SELECT * FROM categorias WHERE id = $idCat";
+        $sql = "SELECT * FROM productos WHERE id = $idPro";
         return $this->select($sql);
     }
 
-    public function modificar($categoria, $imagen, $id)
+    public function modificar($nombre, $descripcion, $precio, $cantidad, $destino, $categoria, $id)
     {
-        $sql = "UPDATE categorias SET categoria=?, imagen=? WHERE id = ?";
-        $array = array($categoria, $imagen, $id);
+        $sql = "UPDATE productos SET nombre=?, descripcion=?, precio=?, cantidad=?, imagen=?, id_categoria=? WHERE id = ?";
+        $array = array($nombre, $descripcion, $precio, $cantidad, $destino, $categoria, $id);
         return $this->save($sql, $array);
     }
 

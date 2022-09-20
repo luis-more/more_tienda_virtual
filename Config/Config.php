@@ -5,7 +5,7 @@ const USER = "root";
 const PASS = "";
 const DB = "tienda_virtual";
 const CHARSET = "charset=utf8";
-const TITLE = "MORE TIENDA ONLINE";
+const TITLE = "MORE TIENDA";
 const MONEDA = "USD";
 const CLIENT_ID = "AdKZSylWp-mhE3yG2_tPTgBM4VdCBG9IfevDxzmCgGaDaugIT6xFXGbd8Z5LCz7rx4jNrm71-abhjMPi";
 

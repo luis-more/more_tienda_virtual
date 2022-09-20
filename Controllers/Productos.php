@@ -19,8 +19,8 @@ class Productos extends Controller
             $data[$i]['imagen'] = '
             <img class="img-thumbnail" src="'.$data[$i]['imagen'].'" alt="'.$data[$i]['nombre'].'" width="50">';
             $data[$i]['accion'] = '<div class="d-flex">
-            <button type="button" class="btn btn-primary" onclick="editCat('.$data[$i]['id'].')"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-danger" onclick="eliminarCat('.$data[$i]['id'].')"><i class="fas fa-trash"></i></button>
+            <button type="button" class="btn btn-primary" onclick="editPro('.$data[$i]['id'].')"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger" onclick="eliminarPro('.$data[$i]['id'].')"><i class="fas fa-trash"></i></button>
             </div>'; 
         }
         echo json_encode($data);
@@ -62,12 +62,12 @@ class Productos extends Controller
                   $respuesta = array('msg' => 'Error al registar', 'icono' => 'error'); 
               }
             }else{                
-                $data = $this->model->modificar($categoria, $destino, $id);
+                $data = $this->model->modificar($nombre, $descripcion, $precio, $cantidad, $destino, $categoria, $id);
                 if($data == 1){
                   if(!empty($imagen['name'])){
                     move_uploaded_file($tmp_name, $destino);
                   }
-                    $respuesta = array('msg' => 'Categoria modoficada', 'icono' => 'success'); 
+                    $respuesta = array('msg' => 'Producto modoficado', 'icono' => 'success'); 
                 }else{
                     $respuesta = array('msg' => 'Error al modificar', 'icono' => 'error'); 
                 }
@@ -80,13 +80,13 @@ class Productos extends Controller
       die(); 
     }
    
-//eliminar categoria
-    public function delete($idCat)
+//eliminar productos
+    public function delete($idPro)
     {
-        if(is_numeric($idCat)){
-            $data = $this->model->eliminar($idCat);
+        if(is_numeric($idPro)){
+            $data = $this->model->eliminar($idPro);
             if($data == 1){
-                $respuesta = array('msg' => 'Categoria dada de baja', 'icono' => 'success'); 
+                $respuesta = array('msg' => 'Producto dado de baja', 'icono' => 'success'); 
             }else{
                 $respuesta = array('msg' => 'Error al eliminar', 'icono' => 'error'); 
             }
@@ -98,11 +98,11 @@ class Productos extends Controller
         die();
     }
 
-    //EDITAR CATEGORIAS
-    public function edit($idCat)
+    //EDITAR productos
+    public function edit($idPro)
     {
-        if(is_numeric($idCat)){
-            $data = $this->model->getCategoria($idCat);
+        if(is_numeric($idPro)){
+            $data = $this->model->getProducto($idPro);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
         die();
