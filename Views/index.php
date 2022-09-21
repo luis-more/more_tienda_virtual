@@ -12,16 +12,20 @@
       <div class="container">
         <div class="row p-5">
           <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-            <img class="img-fluid" src="<?php echo BASE_URL; ?>assets/img/carrusel/1.jpg" alt="">
+            <img class="img-fluid" src="<?php echo BASE_URL; ?>assets/images/carrusel/pc_completa.png" alt="pc_comleta">
           </div>
           <div class="col-lg-6 mb-0 d-flex align-items-center">
             <div class="text-align-left align-self-center">
-              <h1 class="h1 text-util"><b>Laptop</b> Core i7</h1>
-              <h3 class="h2">Lorem ipsum dolor sit amet.</h3>
+              <h1 class="h1 text-util"><b>COMPUTADORA + </b>TECLADO Y MOUSE</h1>
+              <h3 class="h2">Oferta por timpo limitado</h3>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis cum iste beatae itaque impedit dolorem
-                distinctio repudiandae quae harum, molestias officiis numquam optio, corrupti in ea voluptate? Aliquid,
-                recusandae. Quis.</p>
+                *Procesador A4 4000k whith Radeon HD GRAPHICS 3.00GHZ
+                *MEMORIA RAM 4GB
+                *DISCO DURO 500GB
+                *PLACA MS - 7721 V2
+                *MONITOR HP 20
+                *TECLADO
+                *MOUSE</p>
             </div>
           </div>
         </div>
@@ -31,16 +35,19 @@
       <div class="container">
         <div class="row p-5">
           <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-            <img class="img-fluid" src="<?php echo BASE_URL; ?>assets/img/carrusel/2.jpg" alt="">
+            <img class="img-fluid" src="<?php echo BASE_URL; ?>assets/images/carrusel/utiles_escolares.png"
+              alt="utiles_escolares">
           </div>
           <div class="col-lg-6 mb-0 d-flex align-items-center">
             <div class="text-align-left">
-              <h1 class="h1">Proident occaecat</h1>
-              <h3 class="h2">Aliquip ex ea commodo consequat</h3>
-              <p>
-                You are permitted to use this Zay CSS template for your commercial websites.
-                You are <strong>not permitted</strong> to re-distribute the template ZIP file in any kind of template
-                collection websites.
+              <h1 class="h1">ÚTILES ESCOLARES Y DE OFICINA</h1>
+              <h3 class="h2">Consigue las mejores marcas aqui!/</h3>
+              <p>                
+                 Aquí podrás encontrar lo último en
+                útiles de oficina y colegio con el precio que tanto buscas. Consigue las marcas que quieres entre
+                nuestro amplio surtido de productos, como Artesco, Faber Castell, Standford y muchas más Compra folders,
+                 tajadores, tijeras, perforadores y muchos más productos Recuerda que puedes complementar tu compra con
+                nuestras Mochilas, Loncheras y Cartucheras donde podrás guardar tus útiles.
               </p>
             </div>
           </div>
@@ -51,16 +58,21 @@
       <div class="container">
         <div class="row p-5">
           <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-            <img class="img-fluid" src="<?php echo BASE_URL; ?>assets/img/carrusel/3.png" alt="">
+            <img class="img-fluid" src="<?php echo BASE_URL; ?>assets/images/carrusel/audifono2.jpg"
+              alt="audifono-kotiong4000.jpg">
           </div>
           <div class="col-lg-6 mb-0 d-flex align-items-center">
             <div class="text-align-left">
-              <h1 class="h1">Repr in voluptate</h1>
-              <h3 class="h2">Ullamco laboris nisi ut </h3>
+              <h1 class="h1">AUDIFONO GAMER</h1>
+              <h3 class="h2">KOTION EACH G4000 </h3>
               <p>
-                We bring you 100% free CSS templates for your websites.
-                If you wish to support TemplateMo, please make a small contribution via PayPal or tell your friends
-                about our website. Thank you.
+                CARACTERISTICAS: * Modelo KOTION EACH G4000 * Ideal para PC, Laptop, Smartphone, PS4, Xbox one, Nintendo
+                Switch. * Sensibilidad 108dB +/- 3dB * Rango de frecuencia 20-20kHz * Dimensión micrófono 6.0 * 5.0mm *
+                Sensibilidad del micrófono -38dB +/- 3dB * Directividad omnidireccional * LED Voltaje de trabajo dc5v
+                +/- 5% * Corriente de trabajo por debajo de 100 mA * Tamaño de los auriculares
+                aprox.18 * 8.5 * 21cm / 7.1 * 3.3 * Control de volumen en el cable. * Control Encendido y Apagado de
+                Micrófono.
+                * Conector Usb. iluminación Luz Led. * Adaptador Jack 3.5mm 4pines..
               </p>
             </div>
           </div>
